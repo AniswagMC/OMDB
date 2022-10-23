@@ -8,16 +8,29 @@ function App() {
   const [data, setData] = useState({});
 
   // console.log(data)
-  
+
   const searchResult = (childData) => {
     setData(childData)
   }
 
   return (
     <div className="App">
-      <input placeholder='Search Movies' onChange={e => setSearch(e.target.value)} />
-      <Button title = "Search Movie Name" query = {search} queryCallBack={searchResult} />
-      <img src={data['Poster']} />
+      <div style={{ display: "flex", flexDirection: 'row', justifyContent: 'center' }}>
+        <input placeholder='Search Movies' onChange={e => setSearch(e.target.value)} />
+        <Button title="Acquire Movie!" query={search} queryCallBack={searchResult} />
+      </div>
+      <div style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
+        <h1>
+          {data['Title']}
+        </h1>
+        <h5>
+          Released in {data['Year']}
+        </h5>
+        <img src={data['Poster']} width='600'/>
+        <button>
+          Useless Button
+        </button>
+      </div>
     </div>
   );
 }
