@@ -2,22 +2,27 @@ import { useEffect, useState } from 'react';
 import Movie from './Movie';
 import { Box, Modal } from '@mui/material';
 
-const MovieList = ({ movies, query, page = 2 }) => {
+const MovieList = ({ movies, query }) => {
   const uri = process.env.REACT_APP_FETCH_URI
 
   const searchQuery = query.toLowerCase().split(' ').join('+')
 
   const [movieList, setMovieList] = useState(movies['Search'])
-  const [pageNum, setPageNum] = useState(page)
-
-  console.log(movies, movieList)
+  const [pageNum, setPageNum] = useState(2)
+  const [open, setOpen] = useState(false)
+  const [modalData, setModalData] = useState({})
 
   const setMovies = (data) => {
     setMovieList(movieList.concat(data['Search']))
   }
 
+  const toggleOpen = () => {
+    setOpen(!open)
+  }
+
   useEffect(() => {
     setMovieList(movies['Search'])
+    setPageNum(2)
   }, [movies])
 
   const loadMore = async () => {
@@ -37,12 +42,25 @@ const MovieList = ({ movies, query, page = 2 }) => {
       <div style={{ display: 'inline' }}>
         {
           movieList.map(({ Title, Year, imdbID, Poster }) => (
-            <li key={imdbID} style={{ listStyleType: 'none', display: 'inline', padding: '1.5em' }}>
-              <img src={Poster} width='150' />
-            </li>
+            <img key={imdbID} src={Poster} width='150' style={{ padding: '1.5em', cursor: 'pointer' }} 
+              onClick={() => {
+                setOpen(toggleOpen)
+                setModalData({ Title, Year, key: imdbID, Poster })
+              }} />
           ))
         }
       </div>
+
+      <Modal
+        open={open}
+        onClose={toggleOpen}
+      >
+        <Box sx={{
+          borderStyle: 'none'
+        }}>
+          <Movie object={modalData} />
+        </Box>
+      </Modal>
 
       <button onClick={loadMore}
         className='link'

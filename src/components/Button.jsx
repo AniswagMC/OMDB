@@ -4,7 +4,6 @@ const Button = ({ title, query, queryCallBack }) => {
   // console.log(query)
 
   const onSearch = async () => {
-    console.log(uri + "s=" + searchQuery)
     await fetch(uri + "s=" + searchQuery)
     .then(response => {
       if (!response.ok) {
