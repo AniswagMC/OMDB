@@ -2,7 +2,7 @@ const Movie = ({ object }) => {
   const { Title, Poster, Year } = object
 
   return (
-    <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', width: '100vw' }}>
+    <div className='movie-details'>
       <div className="info-display">
         <div className="box">
           <text className="title">
