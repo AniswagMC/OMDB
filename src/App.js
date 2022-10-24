@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import Button from './Button';
+import Button from './components/Button';
+import MovieList from './components/MovieList';
 
 function App() {
   const [search, setSearch] = useState("");
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   // console.log(data)
 
@@ -15,21 +16,15 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{ display: "flex", flexDirection: 'row', justifyContent: 'center' }}>
-        <input placeholder='Search Movies' onChange={e => setSearch(e.target.value)} />
-        <Button title="Acquire Movie!" query={search} queryCallBack={searchResult} />
+      <div style={{ display: "flex", flexDirection: 'row', justifyContent: 'center', padding: '1em' }}>
+        <input placeholder='Search Movies' className='input-bar' onChange={e => setSearch(e.target.value)} />
+        <Button title="Search" query={search} queryCallBack={searchResult} />
       </div>
       <div style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
-        <h1>
-          {data['Title']}
-        </h1>
-        <h5>
-          Released in {data['Year']}
-        </h5>
-        <img src={data['Poster']} width='600'/>
-        <button>
-          Useless Button
-        </button>
+        {data['Response'] == "True"
+          ? <MovieList movies = {data['Search']}/>
+          : <h1 style={{ color: 'white' }}> {data['Error']} </h1>
+        }
       </div>
     </div>
   );

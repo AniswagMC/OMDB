@@ -7,7 +7,7 @@ const Button = ({ title, query, queryCallBack }) => {
   // console.log("searhc Query: " + searchQuery)
 
   const onSearch = async () => {
-    await fetch(uri + "t=" + searchQuery)
+    await fetch(uri + "s=" + searchQuery)
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response was not OK")
@@ -18,7 +18,7 @@ const Button = ({ title, query, queryCallBack }) => {
   }
 
   return (
-    <button onClick={onSearch}>
+    <button onClick={onSearch} className='link'>
       {title}
     </button>
   )
