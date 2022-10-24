@@ -1,7 +1,6 @@
 const Button = ({ title, query, queryCallBack }) => {
   const uri = process.env.REACT_APP_FETCH_URI
   const searchQuery = query.toLowerCase().split(' ').join('+')
-  // console.log(query)
 
   const onSearch = async () => {
     await fetch(uri + "s=" + searchQuery)

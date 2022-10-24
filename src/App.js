@@ -16,8 +16,6 @@ function App() {
     setData(data)
   }, [data])
 
-  // console.log(data['Search'])
-
   return (
     <div className="App">
       <div style={{ display: "flex", flexDirection: 'row', justifyContent: 'center', padding: '1em' }}>
